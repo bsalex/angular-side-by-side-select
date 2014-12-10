@@ -1,0 +1,54 @@
+@import "../../node_modules/bootstrap/less/bootstrap";
+
+.side-by-side-select-control {
+  .make-row();
+}
+
+.side-by-side-select-control__side {
+  .make-xs-column(5);
+}
+
+.side-by-side-select-control__arrows {
+  .make-xs-column(2);
+}
+
+.side-by-side-select-control__move-button {
+  .btn();
+  .btn-primary();
+  .btn-block();
+}
+
+.side-by-side-select-control__move-button--add-to-target::before {
+  content: ">";
+  font-weight: bold;
+}
+
+.side-by-side-select-control__move-button--remove-from-target::before {
+  content: "<";
+  font-weight: bold;
+}
+
+.side-by-side-select-control__panel {
+  &:extend(.panel);
+}
+
+.side-by-side-select-control__panel--source {
+  &:extend(.panel-primary);
+}
+
+.side-by-side-select-control__panel--target {
+  &:extend(.panel-default);
+}
+
+.side-by-side-select-control__panel-heading {
+  &:extend(.panel-heading);
+  &:extend(.panel-primary > .panel-heading);
+}
+
+.side-by-side-select-control__panel-body {
+  .panel-body();
+}
+
+.side-by-side-select-control__panel-heading-title {
+  .panel-title();
+}
