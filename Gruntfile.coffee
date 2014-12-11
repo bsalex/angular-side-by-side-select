@@ -33,7 +33,7 @@ module.exports = (grunt) ->
         files: ["source/**/*.less"]
         tasks: ["less:dev"]
 
-  grunt.registerTask "default", [
+  grunt.registerTask "build", [
     "clean:dist"
     "uglify:dist",
     "less:dist"
