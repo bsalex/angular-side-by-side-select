@@ -12,7 +12,7 @@
                 '                   ng-model="data.searchString"/>' +
                 '        </div>' +
                 '        <div class="side-by-side-select-control__panel side-by-side-select-control__panel--source">' +
-                '            <div ng-show="{{sourceTitle}}" class="side-by-side-select-control__panel-heading">{{sourceTitle}}</div>' +
+                '            <div ng-show="sourceTitle" class="side-by-side-select-control__panel-heading">{{sourceTitle}}</div>' +
                 '            <div class="side-by-side-select-control__panel-body">' +
                 '                <div ng-hide="sideBySideSelectController.getSourceItems().length">{{sourceEmptyText}}</div>' +
                 '                <div class="side-by-side-select-control__item side-by-side-select-control__item--source"' +
@@ -41,7 +41,7 @@
 
                 '    <div class="side-by-side-select-control__side side-by-side-select-control__side--target">' +
                 '        <div class="panel panel-success side-by-side-select-control__panel side-by-side-select-control__panel--target">' +
-                '            <div ng-show="{{targetTitle}}" class="side-by-side-select-control__panel-heading">{{targetTitle}}</div>' +
+                '            <div ng-show="targetTitle" class="side-by-side-select-control__panel-heading">{{targetTitle}}</div>' +
                 '            <div class="side-by-side-select-control__panel-body">' +
                 '                <div ng-hide="sideBySideSelectController.getTargetItems().length">{{targetEmptyText}}</div>' +
                 '                <div class="side-by-side-select-control__item side-by-side-select-control__item--target"' +

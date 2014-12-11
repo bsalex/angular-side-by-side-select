@@ -29,7 +29,7 @@
                     restrict: "E",
                     scope: {
                         onGetItems: "&?",
-                        items:"=?",
+                        items: "=?",
                         itemsComparator: "&?",
 
                         sourceEmptyText: "@?",
