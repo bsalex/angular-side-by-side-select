@@ -18,7 +18,6 @@ module.exports = (grunt) ->
         ]
         dest: "dist/angular-side-by-side-select.js"
 
-
     less:
       dev:
         files:
@@ -37,6 +36,14 @@ module.exports = (grunt) ->
         files:
           src: ["source/**/*.js"]
 
+    karma:
+      watch:
+        configFile: 'karma.conf.js'
+      once:
+        options:
+          singleRun: true
+        configFile: 'karma.conf.js'
+
     watch:
       scripts:
         files: ["source/**/*.js"]
@@ -46,6 +53,8 @@ module.exports = (grunt) ->
         tasks: ["less:dev"]
 
   grunt.registerTask "build", [
+    "jshint"
+    "karma:once"
     "clean:dist"
     "concat:dist"
     "uglify:dist"
