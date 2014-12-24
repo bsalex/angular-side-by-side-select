@@ -1,4 +1,6 @@
 describe("Side by side controller", function () {
+    "use strict";
+
     var $scope, $q, $controller, controller, List, UniqueList;
 
     beforeEach(module('angularSideBySideSelect'));

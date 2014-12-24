@@ -1,5 +1,8 @@
 describe("UniqueList", function () {
+    "use strict";
+
     var UniqueList;
+
     beforeEach(module('angularSideBySideSelect'));
     beforeEach(function () {
         inject(function ($injector) {
@@ -8,7 +11,7 @@ describe("UniqueList", function () {
     });
 
     it("should be instantiable", function () {
-        new UniqueList();
+        return new UniqueList();
     });
 
     describe("data", function () {

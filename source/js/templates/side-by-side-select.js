@@ -1,4 +1,6 @@
 (function () {
+    "use strict";
+
     angular.module("angularSideBySideSelect")
         .run(["$templateCache", function ($templateCache) {
             var template = '<div class="side-by-side-select-control">' +

@@ -1,4 +1,6 @@
 (function () {
+    "use strict";
+
     angular.module("angularSideBySideSelect")
         .controller("SideBySideSelectController", ["$scope", "List", "UniqueList", SideBySideSelectController]);
 
@@ -40,7 +42,7 @@
             } else {
                 return $scope.onGetItems({text: searchString});
             }
-        }
+        };
     }
 
     SideBySideSelectController.prototype = {
@@ -63,7 +65,7 @@
                 }, function () {
                     me.sourceList.setData([]);
                     me.sourceList.clearSelection();
-                })
+                });
             }
         },
         getSourceItems: function () {

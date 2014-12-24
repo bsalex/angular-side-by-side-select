@@ -1,4 +1,6 @@
 describe("List", function () {
+    "use strict";
+
     var List;
     beforeEach(module('angularSideBySideSelect'));
     beforeEach(function () {
@@ -8,7 +10,7 @@ describe("List", function () {
     });
 
     it("should be instantiable", function () {
-        new List();
+        return new List();
     });
 
     describe("data", function () {

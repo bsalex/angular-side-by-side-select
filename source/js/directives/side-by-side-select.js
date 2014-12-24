@@ -1,4 +1,6 @@
 (function () {
+    "use strict";
+
     angular.module("angularSideBySideSelect")
         .directive('sideBySideSelect', [
             "$compile",
@@ -140,7 +142,7 @@
                             }
                         };
                     }
-                }
+                };
             }
         ]);
 })();

@@ -1,0 +1,33 @@
+{
+  "globalstrict": true,
+  "trailing" :true,
+  "freeze":true,
+  "strict":true,
+  "latedef": "nofunc",
+  "camelcase":true,
+  "noempty":true,
+  "noarg":true,
+  "eqeqeq":true,
+  "indent":4,
+  "devel":true,
+  "maxdepth":4,
+  "immed":true,
+  "nonbsp":true,
+  "browser":true,
+  "curly":true,
+  "maxparams":6,
+  "undef":true,
+  "maxcomplexity":10,
+  "nonew":true,
+  "forin":true,
+  "globals" : {
+    "angular": false,
+    "describe": false,
+    "it": false,
+    "beforeEach": false,
+    "module": false,
+    "inject": false,
+    "expect": false,
+    "sinon": false
+  }
+}

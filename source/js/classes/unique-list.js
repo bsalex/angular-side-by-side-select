@@ -1,4 +1,6 @@
 (function () {
+    "use strict";
+
     angular.module("angularSideBySideSelect")
         .factory("UniqueList", ["List", function (List) {
             function UniqueList() {
@@ -14,5 +16,5 @@
             };
 
             return UniqueList;
-        }])
+        }]);
 })();

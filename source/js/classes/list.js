@@ -1,4 +1,6 @@
 (function () {
+    "use strict";
+
     angular.module("angularSideBySideSelect")
         .factory("List", function () {
             function List(comparator) {
@@ -60,10 +62,10 @@
                     }
                 },
                 contains: function (item) {
-                    return (indexOfWithComparator(item, this.data, this.comparator) !== -1)
+                    return (indexOfWithComparator(item, this.data, this.comparator) !== -1);
                 },
                 isSelected: function (item) {
-                    return (indexOfWithComparator(item, this.selection, this.comparator) !== -1)
+                    return (indexOfWithComparator(item, this.selection, this.comparator) !== -1);
                 }
             };
 

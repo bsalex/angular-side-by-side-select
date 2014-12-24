@@ -7,6 +7,11 @@ module.exports = (grunt) ->
 
     uglify:
       dist:
+        src: ["dist/angular-side-by-side-select.js"]
+        dest: "dist/angular-side-by-side-select.min.js"
+
+    concat:
+      dist:
         src: [
           "source/js/module.js"
           "source/**/*.js"
@@ -24,17 +29,25 @@ module.exports = (grunt) ->
         files:
           "dist/angular-side-by-side-select.css": "source/less/styles.less"
 
+    jshint:
+      options:
+        jshintrc: true
+        reporter: require('jshint-stylish')
+      main:
+        files:
+          src: ["source/**/*.js"]
 
     watch:
       scripts:
         files: ["source/**/*.js"]
-        tasks: ["uglify:dist"]
+        tasks: ["concat:dist", "uglify:dist"]
       less:
         files: ["source/**/*.less"]
         tasks: ["less:dev"]
 
   grunt.registerTask "build", [
     "clean:dist"
-    "uglify:dist",
+    "concat:dist"
+    "uglify:dist"
     "less:dist"
   ]

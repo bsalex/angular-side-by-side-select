@@ -1,4 +1,6 @@
 describe("Side by side directive", function () {
+    "use strict";
+
     var $compile,
         $scope,
         $timeout;
@@ -20,7 +22,7 @@ describe("Side by side directive", function () {
 
         $scope.getList = function () {
             return $scope.items;
-        }
+        };
     });
 
     it('should be renderable', function() {
@@ -29,7 +31,7 @@ describe("Side by side directive", function () {
     });
 
     it('should be renderable with titles', function() {
-        $scope.title1 = "\"Source title\""
+        $scope.title1 = "\"Source title\"";
 
         var element = $compile("<side-by-side-select " +
         "source-title=\"Source title\" " +
