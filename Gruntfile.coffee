@@ -26,7 +26,7 @@ module.exports = (grunt) ->
         options:
           compress: true
         files:
-          "dist/angular-side-by-side-select.css": "source/less/styles-with-bootstrap.less"
+          "dist/angular-side-by-side-select.min.css": "source/less/styles-with-bootstrap.less"
 
     jshint:
       options:
