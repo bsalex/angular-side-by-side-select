@@ -26,7 +26,6 @@
                     $compile(element)(element.scope());
                 }
 
-
                 return {
                     restrict: "E",
                     scope: {
@@ -59,6 +58,8 @@
                         angular.forEach(replaceDirectivesMap, function (replaceDirectiveName, directiveName) {
                             if (!(directiveName in attributes)) {
                                 itemDirectives[directiveName] = "default-item-directive";
+                            } else {
+                                itemDirectives[directiveName] = attributes[directiveName];
                             }
 
                             var directiveNameValue = itemDirectives[directiveName];
@@ -76,7 +77,6 @@
                                 angular.forEach(passedAttributes, function (attributeName) {
                                     newElement.attr(attributeName, replacedElement.attr(attributeName));
                                 });
-
                                 replacedElement.replaceWith(newElement);
                             }
                         });
