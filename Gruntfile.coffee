@@ -21,12 +21,12 @@ module.exports = (grunt) ->
     less:
       dev:
         files:
-          "source/css/styles.css": "source/less/styles.less"
+          "source/css/styles.css": "source/less/styles-with-bootstrap.less"
       dist:
         options:
           compress: true
         files:
-          "dist/angular-side-by-side-select.css": "source/less/styles.less"
+          "dist/angular-side-by-side-select.css": "source/less/styles-with-bootstrap.less"
 
     jshint:
       options:
