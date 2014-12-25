@@ -146,6 +146,8 @@
         };
     }
 
+    var filteredItems = [];
+
     SideBySideSelectController.prototype = {
         initialize: function () {
             this.onSearchChange("");
@@ -171,17 +173,21 @@
         },
         getSourceItems: function () {
             if (this.allowDuplicates === false) {
-                var filtered = [],
-                    originalSourceItems = this.sourceList.getData(),
+                var originalSourceItems = this.sourceList.getData(),
                     originalSourceItemsLength = originalSourceItems.length;
+
+                while (filteredItems.length > 0) {
+                    filteredItems.pop();
+                }
+
 
                 for (var i = 0; i < originalSourceItemsLength; i++) {
                     if (!this.targetList.contains(originalSourceItems[i])) {
-                        filtered.push(originalSourceItems[i]);
+                        filteredItems.push(originalSourceItems[i]);
                     }
                 }
 
-                return filtered;
+                return filteredItems;
             } else {
                 return this.sourceList.getData();
             }

@@ -227,6 +227,17 @@ describe("Side by side controller", function () {
                     expect(controller.getSourceItems()).toEqual([testData[0]]);
                 });
 
+                /**
+                 * Needed to avoid digest loop in ng-repeat
+                 */
+                it("should return the same array object if target items list changed", function () {
+                    var originalSource = controller.getSourceItems();
+
+                    controller.addToTarget(testData[1]);
+
+                    expect(controller.getSourceItems()).toBe(originalSource);
+                });
+
                 it("should not contain item from target in source", function () {
                     controller.addToTarget(testData[1]);
 
