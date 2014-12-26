@@ -13,6 +13,13 @@ describe("Side by side directive", function () {
                },
                template: "<div><span class='custom'></span>{{item.name}}</div>"
            };
+        }).directive("customDirective2", function () {
+            return {
+                scope : {
+                    item : "="
+                },
+                template: "<div><span class='custom2'></span>{{item.name}}</div>"
+            };
         });
 
     beforeEach(module('angularSideBySideSelect'));
@@ -62,12 +69,49 @@ describe("Side by side directive", function () {
         var element = $compile("<side-by-side-select " +
         "ng-model=\"result\" " +
         "items=\"items\" " +
-            "source-item-directive=\"custom-directive\"" +
+            "source-item-directive=\"'custom-directive'\"" +
         ">" +
         "</side-by-side-select>")($scope);
 
         $scope.$digest();
 
         expect(element[0].querySelectorAll(".custom").length).toEqual(4);
+    });
+
+    it('should be able resolve item template from variable and change it dynamically', function() {
+        $scope.template = "custom-directive";
+
+        var element = $compile("<side-by-side-select " +
+        "ng-model=\"result\" " +
+        "items=\"items\" " +
+        "source-item-directive=\"template\"" +
+        ">" +
+        "</side-by-side-select>")($scope);
+
+        $scope.$digest();
+
+        $scope.$apply(function () {
+            $scope.template = "custom-directive2";
+        });
+
+        expect(element[0].querySelectorAll(".custom2").length).toEqual(4);
+    });
+
+    it('should output init model values in target list', function() {
+        $scope.result = [
+            {name: 1, field: 2},
+            {name: 2, field: 1}
+        ];
+
+        var element = $compile("<side-by-side-select " +
+        "ng-model=\"result\" " +
+        "items=\"items\" " +
+        "target-item-directive=\"'custom-directive'\"" +
+        ">" +
+        "</side-by-side-select>")($scope);
+
+        $scope.$digest();
+
+        expect(element[0].querySelectorAll(".custom").length).toEqual(2);
     });
 });

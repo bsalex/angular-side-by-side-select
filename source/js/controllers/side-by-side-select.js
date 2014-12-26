@@ -124,6 +124,27 @@
             me.updateModel();
         },
         setTargetItems: function (data) {
+            var targetItems = this.getTargetItems(),
+                equal = true;
+
+
+            if (data === undefined) {
+                equal = false;
+            } else if (targetItems.length !== data.length) {
+                equal = false;
+            } else {
+                for (var i = 0; i < targetItems.length; i++) {
+                    if (!this.comparator(targetItems[i], data[i])) {
+                        equal = false;
+                        break;
+                    }
+                }
+            }
+
+            if (equal) {
+                return;
+            }
+
             this.targetList.setData(data);
             this.targetList.clearSelection();
 

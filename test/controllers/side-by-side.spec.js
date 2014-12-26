@@ -322,6 +322,15 @@ describe("Side by side controller", function () {
                     expect(controller.isSelectedInTarget(testData[1])).toBeFalsy();
                 });
 
+                it("should not clean target selection on target items set and count of new ones is equal to count of chosen previously and items are equal by comparator", function () {
+                    controller.toggleTargetSelection(testData[0]);
+
+                    controller.setTargetItems([{name: "test", field: "1"}, {name: "test2", field: "2"}]);
+
+                    expect(controller.getTargetSelection()).toEqual([testData[0]]);
+                    expect(controller.isSelectedInTarget(testData[1])).toBeFalsy();
+                });
+
                 it("should search item in selection with provided comparator", function () {
                     controller.toggleTargetSelection(testData[0]);
                     expect(controller.isSelectedInTarget({name:"test"})).toBeTruthy();

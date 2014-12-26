@@ -225,6 +225,27 @@
             me.updateModel();
         },
         setTargetItems: function (data) {
+            var targetItems = this.getTargetItems(),
+                equal = true;
+
+
+            if (data === undefined) {
+                equal = false;
+            } else if (targetItems.length !== data.length) {
+                equal = false;
+            } else {
+                for (var i = 0; i < targetItems.length; i++) {
+                    if (!this.comparator(targetItems[i], data[i])) {
+                        equal = false;
+                        break;
+                    }
+                }
+            }
+
+            if (equal) {
+                return;
+            }
+
             this.targetList.setData(data);
             this.targetList.clearSelection();
 
@@ -300,7 +321,13 @@
                         "searchFieldPlaceholder": "Search string",
                         "showSearchField": false,
                         "allowDuplicates": false
-                    };
+                    },
+                    passedAttributes = [
+                        "item",
+                        "on-select",
+                        "is-selected"
+                    ],
+                    defaultItemDirective = "default-item-directive";
 
                 function recompile(element) {
                     $compile(element)(element.scope());
@@ -325,21 +352,23 @@
                         searchFieldPlaceholder: "=?",
                         showSearchField: "=?",
 
-                        allowDuplicates: "=?"
+                        allowDuplicates: "=?",
+                        ngModel: "="
                     },
                     templateUrl: "sideBySideSelectTemplate.html",
                     controller: "SideBySideSelectController",
                     controllerAs: "sideBySideSelectController",
                     require: ["ngModel"],
                     compile: function (element, attributes) {
-                        var itemDirectives = this.itemDirectives || [];
-                        this.itemDirectives = itemDirectives;
+                        if (element.data("itemDirectives") === undefined) {
+                            element.data("itemDirectives", []);
+                        }
+
+                        var itemDirectives = element.data("itemDirectives");
 
                         angular.forEach(replaceDirectivesMap, function (replaceDirectiveName, directiveName) {
                             if (!(directiveName in attributes)) {
-                                itemDirectives[directiveName] = "default-item-directive";
-                            } else {
-                                itemDirectives[directiveName] = attributes[directiveName];
+                                itemDirectives[directiveName] = defaultItemDirective;
                             }
 
                             var directiveNameValue = itemDirectives[directiveName];
@@ -347,12 +376,6 @@
                             if (directiveNameValue !== undefined) {
                                 var newElement = angular.element("<" + directiveNameValue + "></" + directiveNameValue + ">"),
                                     replacedElement = element.find(replaceDirectiveName);
-
-                                var passedAttributes = [
-                                    "item",
-                                    "on-select",
-                                    "is-selected"
-                                ];
 
                                 angular.forEach(passedAttributes, function (attributeName) {
                                     newElement.attr(attributeName, replacedElement.attr(attributeName));
@@ -374,23 +397,17 @@
                                     delete scope.onGetItems;
                                 }
 
-
                                 var ngModelController = controllers[0],
                                     sideBySideSelectController = scope.sideBySideSelectController;
 
 
-                                ngModelController.$formatters.push(function (data) {
-                                    sideBySideSelectController.setTargetItems(data);
+                                ngModelController.$viewChangeListeners.push(function () {
+                                    sideBySideSelectController.setTargetItems(ngModelController.$viewValue);
                                 });
-
-                                function updateModel() {
-                                    ngModelController.$setViewValue(sideBySideSelectController.getTargetItems());
-                                }
 
                                 scope.$on("targetDataUpdated", function () {
-                                    updateModel();
+                                    ngModelController.$setViewValue(sideBySideSelectController.getTargetItems());
                                 });
-
 
                                 function addItemsDirectiveWatcher(directiveName) {
                                     scope.$watch(directiveName, function (newValue, oldValue) {
@@ -405,7 +422,11 @@
 
                                         //Initialization here
                                         if (oldValue === newValue) {
-                                            if (directiveNameCurrentValue === undefined) {
+                                            if (newValue === undefined && oldValue === undefined) {
+                                                return;
+                                            }
+
+                                            if (directiveNameCurrentValue !== newValue) {
                                                 recompile(element);
                                             }
                                             return;
@@ -417,6 +438,8 @@
 
                                 addItemsDirectiveWatcher("sourceItemDirective");
                                 addItemsDirectiveWatcher("targetItemDirective");
+
+                                sideBySideSelectController.setTargetItems(scope.ngModel);
 
                                 sideBySideSelectController.initialize();
                             }
