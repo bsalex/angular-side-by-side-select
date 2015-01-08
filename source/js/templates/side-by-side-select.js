@@ -34,9 +34,11 @@
 
                 '    <div class="side-by-side-select-control__arrows">' +
                 '        <button class="side-by-side-select-control__move-button side-by-side-select-control__move-button--add-to-target"' +
+                '                type="button"' +
                 '                ng-click="sideBySideSelectController.addToTarget(sideBySideSelectController.getSourceSelection())">' +
                 '        </button>' +
                 '        <button class="side-by-side-select-control__move-button side-by-side-select-control__move-button--remove-from-target"' +
+                '                type="button"' +
                 '                ng-click="sideBySideSelectController.removeFromTarget(sideBySideSelectController.getTargetSelection())">' +
                 '        </button>' +
                 '    </div>' +
