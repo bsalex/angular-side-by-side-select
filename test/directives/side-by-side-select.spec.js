@@ -114,4 +114,48 @@ describe("Side by side directive", function () {
 
         expect(element[0].querySelectorAll(".custom").length).toEqual(2);
     });
+
+    it('should watch model values in target list', function() {
+        $scope.result = [];
+
+        var element = $compile("<side-by-side-select " +
+        "ng-model=\"result\" " +
+        "items=\"items\" " +
+        "target-item-directive=\"'custom-directive'\"" +
+        ">" +
+        "</side-by-side-select>")($scope);
+
+        $scope.$digest();
+
+        $scope.result = [
+            {name: 1, field: 2},
+            {name: 2, field: 1}
+        ];
+
+        $scope.$digest();
+
+        expect(element[0].querySelectorAll(".custom").length).toEqual(2);
+    });
+
+    it('should watch model values in target list if they are inserted', function() {
+        $scope.result = [];
+
+        var element = $compile("<side-by-side-select " +
+        "ng-model=\"result\" " +
+        "items=\"items\" " +
+        "target-item-directive=\"'custom-directive'\"" +
+        ">" +
+        "</side-by-side-select>")($scope);
+
+        $scope.$digest();
+
+        [].push.apply($scope.result, [
+            {name: 1, field: 2},
+            {name: 2, field: 1}
+        ]);
+
+        $scope.$digest();
+
+        expect(element[0].querySelectorAll(".custom").length).toEqual(2);
+    });
 });

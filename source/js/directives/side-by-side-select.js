@@ -99,9 +99,8 @@
                                 var ngModelController = controllers[0],
                                     sideBySideSelectController = scope.sideBySideSelectController;
 
-
-                                ngModelController.$viewChangeListeners.push(function () {
-                                    sideBySideSelectController.setTargetItems(ngModelController.$viewValue);
+                                scope.$watchCollection("ngModel", function (newValue) {
+                                    sideBySideSelectController.setTargetItems(newValue);
                                 });
 
                                 scope.$on("targetDataUpdated", function () {
