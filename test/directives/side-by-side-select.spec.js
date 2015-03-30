@@ -78,7 +78,7 @@ describe("Side by side directive", function () {
         expect(element[0].querySelectorAll(".custom").length).toEqual(4);
     });
 
-    it('should be able resolve item template from variable and change it dynamically', function() {
+    it('should be able to resolve item template from variable and change it dynamically', function() {
         $scope.template = "custom-directive";
 
         var element = $compile("<side-by-side-select " +
@@ -96,6 +96,31 @@ describe("Side by side directive", function () {
 
         expect(element[0].querySelectorAll(".custom2").length).toEqual(4);
     });
+
+    it('should be able to reinitialize component if it is under ng-if', function () {
+        $scope.template = "custom-directive";
+        $scope.flag = true;
+
+        var element = $compile("<div>" +
+        "  <div ng-if=\"flag\">" +
+        "    <side-by-side-select " +
+        "    ng-model=\"result\" " +
+        "    items=\"items\" " +
+        "    source-item-directive=\"template\"" +
+        "    >" +
+        "    </side-by-side-select>" +
+        "  </div>" +
+        "</div>")($scope);
+
+        $scope.$digest();
+        $scope.flag = false;
+        $scope.$digest();
+        $scope.flag = true;
+        $scope.$digest();
+
+        expect(element[0].querySelectorAll(".custom").length).toEqual(4);
+    });
+    
 
     it('should output init model values in target list', function() {
         $scope.result = [

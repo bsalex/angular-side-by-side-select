@@ -111,11 +111,6 @@
                                     scope.$watch(directiveName, function (newValue, oldValue) {
                                         var directiveNameCurrentValue = itemDirectives[directiveName];
 
-                                        if ((newValue === directiveNameCurrentValue) &&
-                                            (directiveNameCurrentValue !== undefined)) {
-                                            return;
-                                        }
-
                                         itemDirectives[directiveName] = newValue;
 
                                         //Initialization here
@@ -124,7 +119,8 @@
                                                 return;
                                             }
 
-                                            if (directiveNameCurrentValue !== newValue) {
+                                            if ((directiveNameCurrentValue !== newValue) || (element.data("recompiled") !== "true")) {
+                                                element.data("recompiled", "true");
                                                 recompile(element);
                                             }
                                             return;
